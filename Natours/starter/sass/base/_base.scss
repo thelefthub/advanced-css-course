@@ -1,0 +1,17 @@
+/* global reset */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; 
+  
+}
+/* root font size for rem use */
+html {
+    font-size: 62.5% /*use 10 pixels as rem base - 16px is default of a browser*/
+}
+
+body {
+  box-sizing: border-box;
+}

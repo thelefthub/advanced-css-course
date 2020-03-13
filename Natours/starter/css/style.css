@@ -1,215 +1,144 @@
-/*
-COLORS:
-
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
-
-*/
-
 /* global reset */
 *,
 *::after,
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit; 
-  
-}
+  box-sizing: inherit; }
+
 /* root font size for rem use */
 html {
-    font-size: 62.5% /*use 10 pixels as rem base - 16px is default of a browser*/
-}
+  font-size: 62.5%; }
 
 body {
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    /* font-size: 16px; */
-    line-height: 1.7;
-    color: #777;
-    padding: 3rem; 
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  box-sizing: border-box; }
 
-    box-sizing: border-box;
-}
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+    /*0 --> no transform (i.e.to show the effective state of the element) */ } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+    /*0 --> no transform (i.e.to show the effective state of the element) */ } }
+
+@keyframes moveInButton {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+    /*0 --> no transform (i.e.to show the effective state of the element) */ } }
+
+.btn:link, .btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all .2s;
+  position: relative;
+  font-size: 1.6rem; }
+
+.btn:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+  .btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    /* transform: scale(1.5); */
+    opacity: 0; }
+
+.btn:active {
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
+.btn--white {
+  background-color: #ffffff;
+  color: #777; }
+  .btn--white::after {
+    background-color: #ffffff; }
+
+.btn::after {
+  content: "";
+  /*required!*/
+  display: inline-block;
+  /*required!*/
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s; }
+
+.btn--animated {
+  animation: moveInButton .5s ease-out .75s;
+  animation-fill-mode: backwards;
+  /*use 0% values before animation starts (cf. delay)*/ }
 
 .header {
-    height: 95vh;
-    background-image: linear-gradient(
-        to right bottom,
-         #7ed56fc5,
-         #28b485c7),
-         url(../img/hero.jpg);
-    background-size: cover; /*fit element in box*/
-    background-position: top;
-
-    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-    position: relative; /*cfr abs pos logo*/
-}
-
-.header__logo-box {
+  height: 95vh;
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8), #28b485c7), url(../img/hero.jpg);
+  background-size: cover;
+  /*fit element in box*/
+  background-position: top;
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+  /*cfr abs pos logo*/ }
+  .header__logo-box {
     position: absolute;
     top: 4rem;
-    left: 4rem;
-
-}
-
-.header__logo {
-    height: 3.5rem;
-
-}
-
-/* .logo:hover {
-    animation: moveInRight 1s ease-out;
-} */
-
-.header__text-box {
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
-
-}
+    text-align: center; }
 
 .heading-primary {
-    color: #FFFFFF;
-    text-transform: uppercase;
-
-    backface-visibility: hidden; /*sometimes needed to fix animation bug*/
-    margin-bottom: 6rem;
-}
-
-.heading-primary--main {
+  color: #ffffff;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  /*sometimes needed to fix animation bug*/
+  margin-bottom: 6rem; }
+  .heading-primary--main {
     display: block;
     font-size: 6rem;
     font-weight: 400;
     letter-spacing: 3.5rem;
-
     animation-name: moveInLeft;
     animation-duration: 1s;
     /* animation-delay: 3s; */
-
     /* useful? */
     /* animation-iteration-count: 3; replay */
-    animation-timing-function: ease-out;
-
-}
-
-.heading-primary--sub {
+    animation-timing-function: ease-out; }
+  .heading-primary--sub {
     display: block;
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: 17.4px;
-
-    animation: moveInRight 1s ease-out;
-
-}
-
-@keyframes moveInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-10rem);
-
-    }
-
-    80% {
-        transform: translateX(1rem);
-
-    }
-
-    100% {
-        opacity: 1;
-        transform: translate(0); /*0 --> no transform (i.e.to show the effective state of the element) */
-
-    }
-}
-
-@keyframes moveInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(10rem);
-
-    }
-
-    80% {
-        transform: translateX(-1rem);
-
-    }
-
-    100% {
-        opacity: 1;
-        transform: translate(0); /*0 --> no transform (i.e.to show the effective state of the element) */
-
-    }
-}
-
-@keyframes moveInButton {
-    0% {
-        opacity: 0;
-        transform: translateY(3rem);
-
-    }
-
-    100% {
-        opacity: 1;
-        transform: translate(0); /*0 --> no transform (i.e.to show the effective state of the element) */
-
-    }
-}
-
-.btn:link, btn:visited {
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1.5rem 4rem;
-    display: inline-block;
-    border-radius: 10rem;
-    transition: all .2s ;
-    position: relative;
-    font-size: 1.6rem;
-}
-
-.btn:hover {
-    transform: translateY(-.3rem);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .2);
-
-}
-
-.btn:active {
-    transform: translateY(-.1rem);
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
-}
-
-.btn--white {
-    background-color: #ffffff;
-    color: #777;
-}
-
-.btn::after {
-    content: ""; /*required!*/
-    display: inline-block; /*required!*/
-    height: 100%;
-    width: 100%;
-    border-radius: 10rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all .4s;
-}
-
-.btn--white::after {
-    background-color: #ffffff;
-    
-}
-
-.btn:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    /* transform: scale(1.5); */
-    opacity: 0;
-
-}
-
-.btn--animated {
-    animation: moveInButton .5s ease-out .75s;
-    animation-fill-mode: backwards; /*use 0% values before animation starts (cf. delay)*/
-}
+    animation: moveInRight 1s ease-out; }
